@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dev.studentsystem.controller.HomeController"
-            prefHeight="400.0"
-            prefWidth="600.0"
-            style="-fx-background-color: #f0f4f8;">
-
-    <Label fx:id="helloLabel"
-           text="Hello World"
-           AnchorPane.topAnchor="0"
-           AnchorPane.bottomAnchor="0"
-           AnchorPane.leftAnchor="0"
-           AnchorPane.rightAnchor="0"
-           alignment="CENTER"
-           style="-fx-text-fill: #2d3748;">
-        <font>
-            <Font name="System Bold" size="36.0"/>
-        </font>
-    </Label>
-
-</AnchorPane>
+<BorderPane style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.studentsystem.controller.HomeController">
+    <!-- ═══ HEADER ═══ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: #1565C0; -fx-padding: 12 20;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="📚 Sistema de Notas e Frequência" />
+            <Region HBox.hgrow="ALWAYS" />
+            <!-- Visível apenas para ADMIN -->
+            <Button fx:id="manageUsersButton" onAction="#handleManageUser" style="-fx-background-color: #77a0f2; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="👨‍🏫 Gerenciar Professores" />
+            <Button fx:id="manageDisciplinesButton" onAction="#handleManageDiscipline" style="-fx-background-color: #77a0f2; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="📖 Gerenciar Disciplinas" />
+            <!-- Visível para ADMIN e TEACHER -->
+            <Button fx:id="manageStudentButton" onAction="#handleManageStudent" style="-fx-background-color: #77a0f2; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="🧑‍🎓 Gerenciar Alunos" />
+            <Label fx:id="headerUserLabel" style="-fx-text-fill: white; -fx-font-size: 13px;" />
+            <!-- Visível quando logado -->
+            <Button fx:id="logoutButton" onAction="#handleLogout" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="🚪 Sair" />
+            <!-- Visível quando NÃO logado -->
+            <Button fx:id="loginButton" onAction="#handleLogin" style="-fx-background-color: #FFC107; -fx-text-fill: #333; -fx-font-size: 13px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="🔐 Entrar" />
+            <!-- Visível quando logado -->
+            <Button fx:id="userProfileButton" onAction="#handleUserProfile" style="-fx-background-color: #ffc107; -fx-text-fill: #333333; -fx-font-size: 13px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="👤 Usuário" />
+        </HBox>
+    </top>
+    <!-- ═══ CENTRO ═══ -->
+    <center>
+        <HBox spacing="16" style="-fx-padding: 20;">
+            <!-- Tabela de alunos -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565C0;" text="📋 Lista de Alunos" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="statusLabel" style="-fx-font-size: 12px; -fx-text-fill: gray;" text="" />
+                </HBox>
+                <!-- Colunas fixas Ações, Aluno, Frequência. -->
+                <TableView fx:id="studentTable" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <!-- 1ª coluna: Ações (oculta até login como teacher) -->
+                        <TableColumn fx:id="colActions" prefWidth="130" text="Ações" />
+                        <!-- 2ª coluna: Nome do aluno -->
+                        <TableColumn fx:id="colName" prefWidth="180" text="Aluno" />
+                        <!-- 3ª coluna: Frequência geral -->
+                        <TableColumn fx:id="colFreq" prefWidth="160" text="Frequência (%)" />
+                        <!-- As colunas dinâmicas de disciplinas são adicionadas pelo HomeController.initialize(). -->
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+            <!-- Painel lateral -->
+            <VBox maxWidth="260" minWidth="260" spacing="14" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1565C0;" text="📊 Relatório da Turma" />
+                <Separator />
+                <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #4caf50;" text="⭐ Acima da média geral:" />
+                <Label fx:id="aboveAverageLabel" style="-fx-font-size: 12px; -fx-text-fill: #4caf50;" text="Sem dados disponíveis" wrapText="true" />
+                <Separator />
+                <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #f44336;" text="⚠ Frequência abaixo de 75%:" />
+                <Label fx:id="lowFrequencyLabel" style="-fx-font-size: 12px; -fx-text-fill: #f44336;" text="Sem dados disponíveis" wrapText="true" />
+                <Separator />
+                <Label style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Média por Disciplina:" />
+                <Label fx:id="classAverageLabel" style="-fx-font-size: 12px; -fx-text-fill: gray;" text="Sem dados disponíveis" wrapText="true" />
+                <Region VBox.vgrow="ALWAYS" />
+                <Button maxWidth="1.7976931348623157E308" onAction="#handleRefresh" style="-fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand; -fx-background-radius: 6;" text="🔄 Atualizar" />
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>
