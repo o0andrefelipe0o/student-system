@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.studentsystem.controller.HomeController">
+<BorderPane style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.studentsystem.controller.HomeController">
     <!-- ═══ HEADER ═══ -->
     <top>
         <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: #1565C0; -fx-padding: 12 20;">
