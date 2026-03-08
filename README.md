@@ -116,7 +116,7 @@ Com base nesse contexto, a aplicação foi desenvolvida para o gerenciamento de 
 
 * Back-end em **Java com IntelliJ IDEA** e conceitos de **POO**
 * Front-end em **JavaFX com SceneBuilder**
-* Banco de dados relacional simplificado localmente.
+* Banco de dados relacional simplificado localmente **H2 Database Engine**.
 
 ---
 ### Mockups
@@ -129,7 +129,7 @@ Com base nesse contexto, a aplicação foi desenvolvida para o gerenciamento de 
 ---
 
 ### Estrutura de Dados
-Projeto foi utilizando o **H2 Database Engine** como banco de dados. A escolha foi feita por se tratar de um banco relacional leve e que pode ser executado de forma **embarcada na própria aplicação**, sem necessidade de instalação ou configuração de um servidor externo. Isso facilita a execução do projeto em outras máquinas, reduzindo etapas de configuração.
+O projeto utiliza **H2 Database Engine** como banco de dados. A escolha foi feita por se tratar de um banco relacional leve e que pode ser executado de forma **embarcada na própria aplicação**, sem necessidade de instalação ou configuração de um servidor externo. Isso facilita a execução do projeto em outras máquinas, reduzindo etapas de configuração.
 
 #### Diagrama de relacionamento
 ```mermaid
@@ -185,7 +185,7 @@ erDiagram
 ### Pré-requisitos
 Para executar o sistema é necessário possuir os seguintes requisitos instalados no ambiente:
 -   **Java Development Kit (JDK) 17**
--   **JavaFX** compatível com a versão do Java utilizada
+-   **JavaFX 21**
 -   **Git** (opcional, apenas para clonar o repositório)
 -   Sistema operacional **Windows**
 Não é necessário instalar ou configurar o banco de dados, pois ele é iniciado automaticamente junto com a aplicação.
@@ -205,9 +205,9 @@ cd student-system
 
 3.  **Abrir o projeto em uma IDE Java**
 O projeto pode ser aberto em IDEs como:
--   IntelliJ IDEA
--   Eclipse
--   NetBeans
+	- IntelliJ IDEA
+	- Eclipse
+	- NetBeans
 
 4.  **Executar a aplicação**
 Localize a classe principal do projeto e execute-a pela IDE.
